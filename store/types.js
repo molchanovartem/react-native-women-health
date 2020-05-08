@@ -1,0 +1,1 @@
+export const LOAD_PROFILE_DATA = 'LOAD_PROFILE_DATA'
