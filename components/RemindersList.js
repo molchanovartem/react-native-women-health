@@ -23,6 +23,12 @@ const data = [
         description: 'Description for Item',
         checked: false,
         screen: 'Ovulation',
+    },
+    {
+        title: 'Прием контрацепции',
+        description: 'Description for Item',
+        checked: false,
+        screen: 'Contraception',
     }
 ];
 

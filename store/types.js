@@ -1,1 +1,3 @@
 export const LOAD_PROFILE_DATA = 'LOAD_PROFILE_DATA'
+
+export const LOGIN_USER = 'LOGIN_USER'

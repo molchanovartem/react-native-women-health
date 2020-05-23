@@ -104,8 +104,6 @@ const styles = StyleSheet.create({
         minHeight: 128,
         padding: 25
     },
-
-
     contentContainer: {
         paddingTop: 15,
     },

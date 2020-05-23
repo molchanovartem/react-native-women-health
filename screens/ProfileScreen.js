@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {useEffect} from 'react'
 import {useDispatch, useSelector} from 'react-redux'
-import {StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, Text} from 'react-native';
 import {ScrollView} from 'react-native-gesture-handler';
 import {loadProfile} from "../store/actions/profileActions";
 
@@ -13,10 +13,12 @@ export default function ProfileScreen() {
     }, [dispatch])
 
     const profileName = useSelector(state => state.profile.name)
+    const token = useSelector(state => state.auth.token)
 
     return (
         <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
             <Text>{profileName}</Text>
+            <Text>{token}</Text>
         </ScrollView>
     );
 }

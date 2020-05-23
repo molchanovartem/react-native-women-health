@@ -1,10 +1,10 @@
 import * as React from 'react';
 import RemindersScreen from "../../screens/RemindersScreen";
-import RemindersItemScreen from "../../screens/RemindersItemScreen";
 import StartMenstruationScreen from "../../screens/StartMenstruationScreen";
 import {createStackNavigator} from "@react-navigation/stack";
 import EndMenstruationScreen from "../../screens/EndMenstruationScreen";
 import OvulationScreen from "../../screens/OvulationScreen";
+import ContraceptionScreen from "../../screens/ContraceptionScreen";
 
 export default function RemindersStackScreen() {
     const RemindersStack = createStackNavigator();
@@ -37,6 +37,13 @@ export default function RemindersStackScreen() {
                 component={OvulationScreen}
                 options={{
                     title: 'Овуляция',
+                }}
+            />
+            <RemindersStack.Screen
+                name="Contraception"
+                component={ContraceptionScreen}
+                options={{
+                    title: 'Контрацепция',
                 }}
             />
         </RemindersStack.Navigator>

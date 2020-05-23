@@ -3,20 +3,20 @@ import {Platform, StatusBar, StyleSheet, View} from 'react-native';
 import {SplashScreen} from 'expo';
 import * as Font from 'expo-font';
 import {Ionicons} from '@expo/vector-icons';
-import {AppNavigation} from './navigation/Navigation'
 import {NavigationContainer} from '@react-navigation/native';
-import {createStackNavigator} from '@react-navigation/stack';
 import * as eva from '@eva-design/eva';
 import {default as mapping} from './mapping.json';
 import BottomTabNavigator from './navigation/BottomTabNavigator';
+import AuthNavigation from './navigation/AuthNavigation';
 import useLinking from './navigation/useLinking';
-import {ApplicationProvider} from "@ui-kitten/components";
+import {ApplicationProvider, IconRegistry} from "@ui-kitten/components";
 import {Provider} from 'react-redux'
 import store from './store'
-
-const Stack = createStackNavigator();
+import {EvaIconsPack} from '@ui-kitten/eva-icons';
+import AppScreenManager from "./navigation/AppScreenManager";
 
 /**
+ * @return {null}
  * @return {null}
  */
 
@@ -55,22 +55,24 @@ export default function App(props) {
         return null;
     } else {
         return (
-            <Provider store={store}>
-                <ApplicationProvider {...eva} theme={eva.light} customMapping={mapping}>
-                    <View style={styles.container}>
-                        {Platform.OS === 'ios' && <StatusBar barStyle="default"/>}
-                        <NavigationContainer ref={containerRef} initialState={initialNavigationState}>
+            <>
+                <IconRegistry icons={EvaIconsPack}/>
+                <Provider store={store}>
+                    <ApplicationProvider {...eva} theme={eva.light} customMapping={mapping}>
+                        <View style={styles.container}>
+                            {Platform.OS === 'ios' && <StatusBar barStyle="default"/>}
+                            <NavigationContainer ref={containerRef} initialState={initialNavigationState}>
 
-                            {/*<Stack.Navigator>*/}
-                            {/*    <Stack.Screen name="Root" component={BottomTabNavigator}/>*/}
-                            {/*</Stack.Navigator>*/}
-                            <BottomTabNavigator />
+                                {/*{false ? <BottomTabNavigator/> : <AuthNavigation/>}*/}
 
-                        </NavigationContainer>
+                                <AppScreenManager />
 
-                    </View>
-                </ApplicationProvider>
-            </Provider>
+                            </NavigationContainer>
+
+                        </View>
+                    </ApplicationProvider>
+                </Provider>
+            </>
         );
     }
 }
