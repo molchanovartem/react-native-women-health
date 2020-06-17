@@ -12,7 +12,7 @@ export const MiniText = (props) => {
 const styles = StyleSheet.create({
     text: {
         color: '#8f9bb3',
-        fontSize: 12,
+        fontSize: 10,
         paddingVertical: 5
     },
 });

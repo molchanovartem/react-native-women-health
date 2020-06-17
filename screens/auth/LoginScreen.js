@@ -5,14 +5,11 @@ import {Ionicons} from "@expo/vector-icons";
 import { useDispatch } from "react-redux";
 import { loginUser } from "../../store/actions/authActions";
 
-const AlertIcon = () => (
-    <Ionicons name="md-alert" size={25} color={'#8f9bb3'} style={{marginRight: 5}} />
-);
-
 const LoginScreen = ({navigation}) => {
     const [value, setValue] = React.useState('');
     const [password, setPassword] = React.useState('');
     const [secureTextEntry, setSecureTextEntry] = React.useState(true);
+    const [errors, setErrors] = React.useState([]);
 
     const dispatch = useDispatch();
 
@@ -20,7 +17,7 @@ const LoginScreen = ({navigation}) => {
         setSecureTextEntry(!secureTextEntry);
     };
 
-    const renderIcon = (props) => (
+    const renderIcon = () => (
         <TouchableWithoutFeedback onPress={toggleSecureEntry}>
             <Ionicons name={secureTextEntry ? 'ios-eye-off' : 'ios-eye'} size={25} color={'#8f9bb3'}/>
         </TouchableWithoutFeedback>
@@ -31,11 +28,28 @@ const LoginScreen = ({navigation}) => {
     };
 
     const loginHandler = () => {
-        const token = {
-            token: '654864'
-        };
+        const locErrors = []
+        let reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
 
-        dispatch(loginUser(token));
+        if (reg.test(value) === false) {
+            locErrors.push('Email не корректный')
+        }
+
+        // if (password.length < 6) {
+        //     locErrors.push('Пароль должен содержать минимум 6 символов')
+        // }
+
+        if (locErrors.length === 0) {
+            dispatch(loginUser({email: value, password}))
+                .then(rer => {
+                    console.log(rer)
+                })
+                .catch(err => {
+                    setErrors([err.message])
+                })
+        } else {
+            setErrors(locErrors)
+        }
     };
 
     return (
@@ -44,13 +58,17 @@ const LoginScreen = ({navigation}) => {
                 <Text style={styles.label}>Вход</Text>
             </View>
             <View>
+                {
+                    errors.map((elem, index) => {
+                        return (<Text key={index}> {elem} </Text>)
+                    })
+                }
                 <View style={styles.inputContainer}>
                     <Input
                         value={value}
                         size='large'
-                        label='Телефон'
-                        keyboardType='phone-pad'
-                        placeholder='Вош телефон'
+                        label='Email'
+                        placeholder='Вош email'
                         onChangeText={nextValue => setValue(nextValue)}
                     />
 

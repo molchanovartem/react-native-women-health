@@ -4,6 +4,7 @@ import {useDispatch, useSelector} from 'react-redux'
 import {StyleSheet, Text} from 'react-native';
 import {ScrollView} from 'react-native-gesture-handler';
 import {loadProfile} from "../store/actions/profileActions";
+import {loginUser, logout} from "../store/actions/authActions";
 
 export default function ProfileScreen() {
     const dispatch = useDispatch()
@@ -13,12 +14,19 @@ export default function ProfileScreen() {
     }, [dispatch])
 
     const profileName = useSelector(state => state.profile.name)
-    const token = useSelector(state => state.auth.token)
+    const token = useSelector(state => state.auth.accessToken)
+    const user = useSelector(state => state.auth.user)
+
+    const logoutHandler = () => {
+        dispatch(logout())
+    };
 
     return (
         <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
             <Text>{profileName}</Text>
             <Text>{token}</Text>
+            <Text>{JSON.stringify(user)}</Text>
+            <Text onPress={logoutHandler}>Выход</Text>
         </ScrollView>
     );
 }

@@ -48,20 +48,6 @@ const RemindersItemScreen = (props) => {
                 {selectData.map(renderOption)}
             </Select>
 
-            <View>
-                {show && (
-                    <DateTimePicker
-                        testID="dateTimePicker"
-                        timeZoneOffsetInMinutes={0}
-                        value={time}
-                        mode={'time'}
-                        is24Hour={true}
-                        display="default"
-                        onChange={onChange}
-                    />
-                )}
-            </View>
-
             <Input
                 size='large'
                 label='Сообщение'
@@ -76,6 +62,20 @@ const RemindersItemScreen = (props) => {
                 <Text style={styles.timeInput} onPress={showTimePicker}>
                     {timeInput}
                 </Text>
+            </View>
+
+            <View>
+                {show && (
+                    <DateTimePicker
+                        testID="dateTimePicker"
+                        timeZoneOffsetInMinutes={0}
+                        value={time}
+                        mode={'time'}
+                        is24Hour={true}
+                        display="default"
+                        onChange={onChange}
+                    />
+                )}
             </View>
 
         </View>
@@ -101,7 +101,7 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: '#fafafa',
-        minHeight: 128,
+        minHeight: '100%',
         padding: 25
     },
     contentContainer: {

@@ -6,8 +6,6 @@ import {Ionicons} from '@expo/vector-icons';
 import {NavigationContainer} from '@react-navigation/native';
 import * as eva from '@eva-design/eva';
 import {default as mapping} from './mapping.json';
-import BottomTabNavigator from './navigation/BottomTabNavigator';
-import AuthNavigation from './navigation/AuthNavigation';
 import useLinking from './navigation/useLinking';
 import {ApplicationProvider, IconRegistry} from "@ui-kitten/components";
 import {Provider} from 'react-redux'
@@ -40,7 +38,6 @@ export default function App(props) {
                     'space-mono': require('./assets/fonts/SpaceMono-Regular.ttf'),
                 });
             } catch (e) {
-                // We might want to provide this error information to an error reporting service
                 console.warn(e);
             } finally {
                 setLoadingComplete(true);

@@ -4,7 +4,7 @@ import AuthNavigation from "./AuthNavigation";
 import {useSelector} from 'react-redux'
 
 export default function AppScreenManager() {
-    const token = useSelector(state => state.auth.token)
+    const token = useSelector(state => state.auth.accessToken)
 
     return (
         <>
